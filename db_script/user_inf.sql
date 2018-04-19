@@ -1,0 +1,12 @@
+CREATE TABLE user_inf (
+    ID INT(11) NOT NULL AUTO_INCREMENT,
+    username VARCHAR(20) DEFAULT NULL,
+    loginname VARCHAR(20) NOT NULL,
+    password VARCHAR(16) NOT NULL,
+    status INT(11) NOT NULL DEFAULT '1',
+    createdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (ID)
+)  ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=UTF8;
+
+INSERT INTO user_inf (ID,loginname,password,status,createdate,username) VALUES
+	(1,'admin','123456',2,'2018-04-20 09:00:00','超级管理员');
