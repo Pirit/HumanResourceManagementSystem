@@ -47,10 +47,10 @@ public class JobDynaSqlProvider {
         return new SQL() {
             {
                 INSERT_INTO(JOBTABLE);
-                if (job.getName() != null && job.getName().equals("")) {
+                if (job.getName() != null) {
                     VALUES("name", "#{name}");
                 }
-                if (job.getRemark() != null && job.getRemark().equals("")) {
+                if (job.getRemark() != null) {
                     VALUES("remark", "#{remark}");
                 }
             }
@@ -65,9 +65,9 @@ public class JobDynaSqlProvider {
                     SET(" name=#{name} ");
                 }
                 if (job.getRemark() != null) {
-                    SET(" remark=#{remark} ");
+                    SET(" remark=#{remark}");
                 }
-                WHERE(" id=#{id} ");
+                WHERE(" id = #{id}");
             }
         }.toString();
     }
