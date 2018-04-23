@@ -20,8 +20,11 @@ public interface DeptDao {
     @SelectProvider(type = DeptDynaSqlProvider.class, method = "count")
     Integer count(Map<String, Object> params);
 
-    @Select("select * from " + DEPTTABLE + " where id=#{id} ")
+    @Select("select * from " + DEPTTABLE + " ")
     List<Dept> selectAllDept();
+
+    @Select("select * from " + DEPTTABLE + " where id=#{id} ")
+    Dept selectById(Integer id);
 
     @Delete("delete from " + DEPTTABLE + " where id = #{id} ")
     void deleteById(Integer id);
