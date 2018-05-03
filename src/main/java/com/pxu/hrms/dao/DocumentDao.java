@@ -21,13 +21,13 @@ public interface DocumentDao {
             @Result(column = "CREATE_DATE", property = "createDate", javaType = Date.class),
             @Result(column = "USER_ID", property = "user", one = @One(select = "com.pxu.hrms.dao.UserDao.selectById", fetchType = FetchType.EAGER)),
     })
-    List<DocumentDao> selectByOage(Map<String, Object> params);
+    List<Document> selectByOage(Map<String, Object> params);
 
     @SelectProvider(type = DocumentDynaSqlProvider.class, method = "count")
     Integer count(Map<String, Object> params);
 
     @Select("select * from " + DOCUMENTTABLE + " where id=#{id} ")
-    Notice selectById(Integer id);
+    Document selectById(Integer id);
 
     @Select("delete from " + DOCUMENTTABLE + " where id=#{id} ")
     void deleteById(Integer id);

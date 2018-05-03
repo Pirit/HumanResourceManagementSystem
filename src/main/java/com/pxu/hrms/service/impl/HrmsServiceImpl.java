@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
 @Service("hrmsService")
@@ -78,28 +79,37 @@ public class HrmsServiceImpl implements HrmsService {
 
     /***********************Employee Service Implements*************************************************************/
     @Override
+    @Transactional(readOnly = true)
     public List<Employee> findEmployee(Employee employee, PageModel pageModel) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("employee", employee);
+        int recordCount = employeeDao.count(params);
+        pageModel.setRecordCount(recordCount);
+        if (recordCount > 0) {
+            params.put("pageModel", pageModel);
+        }
+        return employeeDao.selectByPage(params);
     }
 
     @Override
     public void removeEmployeeById(Integer id) {
-
+        employeeDao.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Employee findEmployeeById(Integer id) {
-        return null;
+        return employeeDao.selectById(id);
     }
 
     @Override
     public void addEmployee(Employee employee) {
-
+        employeeDao.save(employee);
     }
 
     @Override
     public void modifyEmployee(Employee employee) {
-
+        employeeDao.update(employee);
     }
 
 
@@ -202,46 +212,58 @@ public class HrmsServiceImpl implements HrmsService {
 
     @Override
     public void removeNoticeById(Integer id) {
-
+        noticeDao.deleteById(id);
     }
 
     @Override
     public void addNotice(Notice notice) {
-
+        noticeDao.save(notice);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Notice findNoticeById(Integer id) {
-        return null;
+        return noticeDao.selectById(id);
     }
 
     @Override
     public void modifyNotice(Notice notice) {
-
+        noticeDao.update(notice);
     }
 
+    /***********************Document Service Implements*************************************************************/
+
     @Override
+    @Transactional(readOnly = true)
     public List<Document> findDocument(Document document, PageModel pageModel) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("document", document);
+        int recordCount = documentDao.count(params);
+        pageModel.setRecordCount(recordCount);
+        if (recordCount > 0) {
+            params.put("pageModel", pageModel);
+        }
+        return documentDao.selectByOage(params);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Document findDocumentById(Integer id) {
-        return null;
+        return documentDao.selectById(id);
     }
 
     @Override
     public void removeDocumentById(Integer id) {
-
+        documentDao.deleteById(id);
     }
 
     @Override
     public void addDocument(Document document) {
-
+        documentDao.save(document);
     }
 
     @Override
-    public void mofifyDocument(Document document) {
-
+    public void modifyDocument(Document document) {
+        documentDao.update(document);
     }
 }

@@ -82,5 +82,5 @@ public interface HrmsService {
 
     void  addDocument(Document document);
 
-    void mofifyDocument(Document document);
+    void modifyDocument(Document document);
 }
